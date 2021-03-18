@@ -18,6 +18,10 @@ public class OrderGoodService extends BaseGoodOrderTransactionService {
 
     @Override
     public Result tryBusiness(BaseTransaction transaction, GoodOrder goodOrder) {
+        // if(user.money -=100)     try. 
+        //  good.nums -=1   comfirm
+        // return 'success'
+        
         // 检查商品数量, 分布式锁， 锁同一个商品
         Good storedGood = Good.getGood(goodOrder.getGoodId());
         if (storedGood.getNums() < goodOrder.getNums()) {

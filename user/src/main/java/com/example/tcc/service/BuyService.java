@@ -1,34 +1,30 @@
 package com.example.tcc.service;
 
-import com.example.tcc.entity.BaseTransaction;
 import com.example.tcc.entity.Result;
 import com.example.tcc.entity.User;
 import com.example.tcc.entity.UserBuyRequest;
-import com.example.tcc.service.base.BaseUserTransactionService;
-import org.springframework.beans.BeanUtils;
+import com.example.tcc.entity.UserOrder;
+import com.example.tcc.entity.transaction.BaseTransaction;
+import com.example.tcc.service.base.BaseUserOrderTransactionService;
 
-public class BuyService extends BaseUserTransactionService {
-    
+public class BuyService extends BaseUserOrderTransactionService {
+
     public void userBuy(UserBuyRequest userBuyRequest) throws Exception {
-        User user = new User();
-        BeanUtils.copyProperties(userBuyRequest, user);
-        user.setMoney(user.getMoney() - userBuyRequest.getCost());
-        this.process(user, userBuyRequest.getRequestId());
-    }
-    
-    
-    @Override
-    public Result tryBusiness(BaseTransaction transaction, User user) {
-        return Result.builder().status("success").build();
+        this.process(userBuyRequest, userBuyRequest.getRequestId());
     }
 
     @Override
-    public User confirmBusiness(BaseTransaction transaction, User user, Result result) {
+    public Result tryBusiness(BaseTransaction transaction, UserOrder userOrder) {
         return null;
     }
 
     @Override
-    public User cancelBusiness(BaseTransaction transaction, User user, Result result) {
+    public UserOrder confirmBusiness(BaseTransaction transaction, UserOrder userOrder, Result result) {
+        return null;
+    }
+
+    @Override
+    public UserOrder cancelBusiness(BaseTransaction transaction, UserOrder userOrder, Result result) {
         return null;
     }
 }

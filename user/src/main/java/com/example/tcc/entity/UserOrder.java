@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GoodOrder extends BaseTarget {
+public class UserOrder extends BaseTarget {
 
     private String id;
     

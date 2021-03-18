@@ -1,4 +1,4 @@
-package com.example.tcc.entity;
+package com.example.tcc.entity.transaction;
 
 import lombok.*;
 
@@ -10,6 +10,8 @@ import lombok.*;
 public class BaseTransaction {
 
     private Integer id;
+    
+    private String relatedTargetId;
 
     private String requestId;
 

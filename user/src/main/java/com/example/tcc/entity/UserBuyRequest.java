@@ -3,7 +3,7 @@ package com.example.tcc.entity;
 import lombok.Data;
 
 @Data
-public class UserBuyRequest {
+public class UserBuyRequest extends UserOrder {
     
     private String requestId;
     

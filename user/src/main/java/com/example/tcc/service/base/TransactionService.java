@@ -1,7 +1,8 @@
 package com.example.tcc.service.base;
 
-import com.example.tcc.entity.BaseTransaction;
 import com.example.tcc.entity.Result;
+import com.example.tcc.entity.transaction.BaseTarget;
+import com.example.tcc.entity.transaction.BaseTransaction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,30 +15,30 @@ import org.springframework.util.StringUtils;
 @NoArgsConstructor
 @Service
 @Slf4j
-public abstract class TransactionService<T> {
+public abstract class TransactionService<T extends BaseTarget> {
 
-    private String BaseTransactionType;
-
+    private String transactionType;
 
     /**
      * 自检
      */
     public void selfCheck(T t) throws Exception {
-        if (!StringUtils.hasLength(this.getBaseTransactionType())) {
+        if (!StringUtils.hasLength(this.getTransactionType())) {
             throw new Exception("this.BaseTransactionType 不能为空");
         }
     }
 
     private BaseTransaction beginTransaction(T t, String requestId) throws Exception {
-        log.info("begin BaseTransaction, BaseTransaction type: {}, requestId: {}", this.BaseTransactionType, requestId);
+        log.info("begin transaction, transaction type: {}, requestId: {}", this.transactionType, requestId);
         this.selfCheck(t);
         if (!StringUtils.hasLength(requestId)) {
             throw new Exception("请求id不能为空");
         }
         // 根据requestId检测事务是否存在，不存在则创建新的事务
         BaseTransaction newTransaction = new BaseTransaction();
+        newTransaction.setRelatedTargetId(t.getId());
         newTransaction.setRequestId(requestId);
-        newTransaction.setType(this.BaseTransactionType);
+        newTransaction.setType(this.transactionType);
         newTransaction.setStatus("Pending");
         return newTransaction;
     }

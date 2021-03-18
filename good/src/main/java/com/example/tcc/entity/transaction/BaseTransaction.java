@@ -17,8 +17,10 @@ public class BaseTransaction {
 
     private String parentTransactionId;
 
+    // 下单， 退货
     private String type;
 
+    // begin, pending, success, fail
     private String status;
 
     private String remark;

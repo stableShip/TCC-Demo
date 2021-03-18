@@ -11,6 +11,21 @@ import java.util.Map;
 @RestController
 public class GoodController {
 
+
+    /**
+     * 下单
+     *
+     * @return
+     */
+    @PostMapping("/orderGood")
+    public Map orderGood() {
+        return null;
+    }
+
+    /**
+     * 定时获取是否有待处理的事务, 发送邮件通知
+     * @return
+     */
     @PostMapping("/pendingTransaction")
     public Map getPendingTransaction(){
         return null;
@@ -26,6 +41,12 @@ public class GoodController {
         String orderId = data.get("orderId");
 //        TransactionService.getTransactionByRelatedTargetId(orderId);
         return new HashMap();
+    }
+    
+    
+    public Map retryTransaction(Map<String, String> data){
+        return new HashMap();
+
     }
 
 }
